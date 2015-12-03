@@ -1,32 +1,34 @@
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="text-center">Alurapic</h1>
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+
+            <!-- Novidade! -->
+
+             <div class="input-group">
+                <span class="input-group-btn">
+                    <a href="/fotos/new" class="btn btn-primary" type="button">
+                        Nova foto
+                    </a>
+                </span>
+                <input class="form-control" placeholder="filtrar pelo título da foto" ng-model="filtro" ng-model-options="{ debounce: 500 }">
+            </div> 
+
+            <!-- fim novidade! -->
+
+        </form>
+    </div> <!-- fim col-md-12 -->
+    <div class="col-md-12">
+            <h1></h1>
     </div>
+</div> <!-- fim row -->
 
-        <!--
-        <div ng-repeat="foto in fotos" class="panel-default">
-            <div class="panel-heading">
-                <p class="panel-title">{{foto.titulo}}</p>
-            </div>
-            <div class="panel-body">
-                <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">     
-            </div>
-        </div>
-        -->              
-        <div class="row">
-            <div class="col-md-12">
-            <form>
-                 <input class="form-control" placeholder="filtrar pelo título da foto" ng-model="filtro" 
-                        ng-model-options={debounce:500} >
-            </form>
-            </div> <!-- fim col-md-12 -->
-        </div> <!-- fim row -->
-        <div class="row" >                    
-            <meu-painel  class="col-md-3 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
-                <minha-foto  class="img-responsive center-block" url="{{foto.url}}" titulo="{{foto.titulo}}">                        
-                </minha-foto>
-            </meu-painel>                    
-        </div>
-
-     <!-- fim panel-->
-</div><!-- fim container -->      
+<div class="row">
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}">
+        </minha-foto>
+    </meu-painel>
+</div>
