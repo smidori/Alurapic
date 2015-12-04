@@ -12,8 +12,6 @@ angular.module('alurapic').controller('FotoController', function($scope, $http, 
     } 
     
     $scope.submeter = function() {
-        console.log("id " + $scope.fotoId);
-        console.log("id rout " + $routeParams.fotoId);
         
         if($scope.formulario.$valid){
            
