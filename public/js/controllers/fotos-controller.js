@@ -1,9 +1,36 @@
-angular.module('alurapic').controller('FotosController', function($scope, $http){
+angular.module('alurapic').controller('FotosController', function($scope, recursoFoto){
     $scope.fotos = [];
     $scope.filtro = '';
     $scope.mensagem = '';
     $scope.mensagemErro = '';
 
+    //var recursoFoto = $resource('v1/fotos/:idFoto');
+    recursoFoto.query( 
+      function(fotos){
+           $scope.fotos = fotos;     
+      },
+      function(erro){  
+           console.log(error);
+      }
+    )
+    
+    $scope.excluir = function(foto){    
+        
+        recursoFoto.delete({idFoto: foto._id},  
+        function(){
+            //atualiza a lista já carregada
+            var indiceFoto = $scope.fotos.indexOf(foto);
+            $scope.fotos.splice(indiceFoto, 1);            
+            $scope.mensagem  = "Foto " + foto.titulo + " excluída com sucesso";
+        },
+        function(erro){
+            $scope.mensagem  = "";
+            $scope.mensagemErro  = "Erro ao excluir foto " + erro;
+        })        
+    }
+        
+    /* 
+    // com http 
     
     $http.get("v1/fotos").success(
         function(fotos){
@@ -29,23 +56,7 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
             $scope.mensagemErro  = "Erro ao excluir foto " + erro;
         })        
     }
-    
-    /*
-       $scope.fotos = [
-        {
-        url : "http://www.fundosanimais.com/Minis/leoes.jpg", 
-        titulo : "Leão 1"
-        }, 
-        {
-        url : "http://www.fundosanimais.com/Minis/leoes.jpg", 
-        titulo : "Leão 2"
-        },
-        {
-        url : "http://www.fundosanimais.com/Minis/leoes.jpg", 
-        titulo : "Leão 3"
-        }
-        ] 
     */
-    
+
     
 }); 
